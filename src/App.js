@@ -8,6 +8,8 @@ import PersonasView from "./components/personas/PersonasView";
 import PersonasEdit from "./components/personas/PersonasEdit";
 import CategoriasList from "./components/categorias/CategoriasList";
 import CategoriasAdd from "./components/categorias/CategoriasAdd";
+import LibrosList from "./components/libros/LibrosList";
+import LibrosAdd from "./components/libros/LibrosAdd";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route exact path="/personas/edit/:id" component={PersonasEdit} />
           <Route exact path="/categorias" component={CategoriasList} />
           <Route exact path="/categorias/new" component={CategoriasAdd} />
+          <Route exact path="/libros" component={LibrosList} />
+          <Route exact path="/libros/new" component={LibrosAdd} />
         </Router>
       </div>
     </div>
