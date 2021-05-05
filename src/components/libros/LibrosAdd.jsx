@@ -41,6 +41,7 @@ export default function LibrosAdd(props) {
         form
       );
       dispatch({ type: "AGREGAR_LIBROS", libro: serverResponse.data });
+      setError("");
       history.push("/libros");
     } catch (e) {
       setError(e.message);
@@ -51,6 +52,7 @@ export default function LibrosAdd(props) {
     try {
       const respuesta = await axios.get("http://localhost:3001/api/categorias");
       setCategorias(respuesta.data);
+      setError("");
     } catch (e) {
       setError(e.message);
     }
@@ -68,19 +70,23 @@ export default function LibrosAdd(props) {
           value={form.nombre}
           placeholder="Nombre"
           onChange={handleName}
+          required
         />
       </div>
       <div>
         <label>Descripción: </label>
-        <input
-          type="text"
+        <br />
+        <textarea
+          rows="4"
+          cols="50"
           value={form.descripcion}
-          placeholder="Descripción"
           onChange={handleDescription}
-        />
+        >
+          Descripción
+        </textarea>
       </div>
       <div>
-        <select name="categoria_id" onChange={handleCategoria}>
+        <select name="categoria_id" onChange={handleCategoria} required>
           <option value="">Seleccione una categoria</option>
           {categorias.map((unaCategoria) =>
             unaCategoria ? (

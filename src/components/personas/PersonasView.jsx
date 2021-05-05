@@ -8,19 +8,23 @@ export default function PersonasView() {
   const params = useParams();
   const list = useSelector((state) => state.personas);
   const [personas, setPersonas] = React.useState({});
+  const [error, setError] = React.useState("");
   const history = useHistory();
 
   const borrarRegistro = async (idABorrar) => {
     try {
       await axios.delete(`http://localhost:3001/api/personas/${idABorrar}`);
       dispatch({ type: "REMOVER_PERSONA", idElementoARemover: idABorrar });
+      setError("");
       history.push("/personas");
-    } catch (e) {}
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   const editarRegistro = (id) => {
-    history.push(`/personas/edit/${id}`)
-  }
+    history.push(`/personas/edit/${id}`);
+  };
 
   React.useEffect(() => {
     if (!list || list.length == 0) return;
@@ -40,7 +44,7 @@ export default function PersonasView() {
       <button onClick={() => borrarRegistro(personas.id)}>
         Eliminar registro
       </button>
-      <button onClick={()=> editarRegistro(personas.id)}>Editar</button>
+      <button onClick={() => editarRegistro(personas.id)}>Editar</button>
     </>
   );
 }

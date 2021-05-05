@@ -12,6 +12,7 @@ export default function PersonasAdd(props) {
     alias: "",
     email: "",
   });
+  const [error, setError] = React.useState("");
 
   const handleName = (e) => {
     const newForm = JSON.parse(JSON.stringify(form));
@@ -47,11 +48,10 @@ export default function PersonasAdd(props) {
       );
 
       dispatch({ type: "AGREGAR_PERSONA", persona: serverResponse.data });
+      setError("");
       history.push("/personas");
     } catch (e) {
-      console.log("Error agregar persona"+e.message);
-      return (<div><h1>{e.message}</h1></div>)
-      
+      setError(e.message);
     }
   };
 
@@ -64,6 +64,7 @@ export default function PersonasAdd(props) {
           value={form.nombre}
           placeholder="Nombre"
           onChange={handleName}
+          required
         />
       </div>
       <div>
@@ -73,6 +74,7 @@ export default function PersonasAdd(props) {
           value={form.apellido}
           placeholder="Apellido"
           onChange={handleSurname}
+          required
         />
       </div>
       <div>
@@ -82,17 +84,20 @@ export default function PersonasAdd(props) {
           value={form.alias}
           placeholder="Alias"
           onChange={handleAlias}
+          required
         />
       </div>
       <div>
         <label>Email: </label>
         <input
-          type="text"
+          type="email"
           value={form.email}
           placeholder="Email"
           onChange={handleEmail}
+          required
         />
       </div>
+
       <div>
         <button onClick={handleSave}>Guardar</button>
         <button onClick={handleCancel}>Cancelar</button>

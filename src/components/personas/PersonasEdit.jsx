@@ -31,6 +31,8 @@ export default function PersonasEdit(props) {
 
   const placeHolderData = list.find((unElemento) => unElemento.id == params.id);
 
+  console.log(placeHolderData.nombre);
+
   const handleChangeName = (e) => {
     const newForm = JSON.parse(JSON.stringify(form));
     newForm.nombre = e.target.value;
@@ -64,43 +66,44 @@ export default function PersonasEdit(props) {
 
   return (
     <div>
-      <div>
-        <label>Nombre: </label>
-        <input
-          type="text"
-          value={form.nombre}
-          placeholder={placeHolderData.nombre}
-          onChange={handleChangeName}
-        />
-      </div>
-      <div>
-        <label>Apellido: </label>
-        <input
-          type="text"
-          value={form.apellido}
-          placeholder={placeHolderData.apellido}
-          onChange={handleChangeSurname}
-        />
-      </div>
-      <div>
-        <label>Alias: </label>
-        <input
-          type="text"
-          value={form.alias}
-          placeholder={placeHolderData.alias}
-          onChange={handleChangeAlias}
-        />
-      </div>
-      <div>
-        <label>Email: </label>
-        <input
-          type="text"
-          placeholder={placeHolderData.email}
-          value={form.email}
-          onChange={handleChangeEmail}
-          
-        />
-      </div>
+      <label>Nombre: </label>
+      <input
+        type="text"
+        value={form.nombre}
+        placeholder={placeHolderData.nombre}
+        onChange={handleChangeName}
+        required
+      />
+
+      <br />
+      <label>Apellido: </label>
+      <input
+        type="text"
+        value={form.apellido}
+        placeholder={placeHolderData.apellido}
+        onChange={handleChangeSurname}
+        required
+      />
+
+      <br />
+      <label>Alias: </label>
+      <input
+        type="text"
+        value={form.alias}
+        placeholder={placeHolderData.alias}
+        onChange={handleChangeAlias}
+        required
+      />
+      <br />
+
+      <label>Email: </label>
+      <input
+        type="text"
+        placeholder={placeHolderData.email}
+        value={form.email}
+        onChange={handleChangeEmail}
+        required
+      />
       <div className="botonesEdit">
         <button onClick={saveEdit}>Guardar</button>
         <button onClick={cancelEdit}>Cancelar</button>

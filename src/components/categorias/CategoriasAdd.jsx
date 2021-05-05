@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function CategoriasAdd() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({
     nombre: "",
   });
@@ -23,9 +25,11 @@ export default function CategoriasAdd() {
         form
       );
       dispatch({ type: "AGREGAR_CATEGORIA", categoria: serverResponse.data });
+      setError("");
       history.push("/categorias");
     } catch (e) {
-      console.log("Error al agregar categoria" + e.message);
+      setError(e.message);
+      swal("Error", error, "error");
     }
   };
 
@@ -41,6 +45,7 @@ export default function CategoriasAdd() {
           value={form.nombre}
           placeholder={"Nombre de categoria"}
           onChange={handleCategoryName}
+          required
         />
       </div>
       <button onClick={handleSave}>Guardar</button>
