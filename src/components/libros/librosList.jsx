@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 export default function LibrosList() {
   const list = useSelector((state) => state.libros);
@@ -14,7 +15,7 @@ export default function LibrosList() {
       dispatch({ type: "LIBROS_LIST", list: respuesta.data });
       setError("");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   }, []);
 

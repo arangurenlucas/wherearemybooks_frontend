@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function PersonasList() {
   const list = useSelector((state) => state.personas);
@@ -13,7 +14,7 @@ export default function PersonasList() {
       dispatch({ type: "PERSONAS_LIST", list: respuesta.data });
       setError("");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   }, []);
 

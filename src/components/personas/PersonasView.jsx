@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams, useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function PersonasView() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function PersonasView() {
       setError("");
       history.push("/personas");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
 

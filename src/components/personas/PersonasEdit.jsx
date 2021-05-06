@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams, useHistoy, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import swal from "sweetalert";
 
 export default function PersonasEdit(props) {
   const params = useParams();
@@ -21,7 +22,7 @@ export default function PersonasEdit(props) {
       );
       setForm(respuesta.data);
     } catch (e) {
-      console.log(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
   React.useEffect(() => {
@@ -56,8 +57,12 @@ export default function PersonasEdit(props) {
   };
 
   const saveEdit = async () => {
-    await axios.put("http://localhost:3001/api/personas/" + params.id, form);
-    history.push("/personas");
+    try {
+      await axios.put("http://localhost:3001/api/personas/" + params.id, form);
+      history.push("/personas");
+    } catch (e) {
+      swal("Error", e.response.data, "error");
+    }
   };
 
   const cancelEdit = () => {

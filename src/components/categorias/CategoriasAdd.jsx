@@ -28,8 +28,7 @@ export default function CategoriasAdd() {
       setError("");
       history.push("/categorias");
     } catch (e) {
-      setError(e.message);
-      swal("Error", error, "error");
+      swal("Error", e.response.data, "error");
     }
   };
 

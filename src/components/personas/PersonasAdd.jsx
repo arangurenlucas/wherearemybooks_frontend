@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 export default function PersonasAdd(props) {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export default function PersonasAdd(props) {
       setError("");
       history.push("/personas");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
 
@@ -64,7 +65,6 @@ export default function PersonasAdd(props) {
           value={form.nombre}
           placeholder="Nombre"
           onChange={handleName}
-          required
         />
       </div>
       <div>
@@ -74,7 +74,6 @@ export default function PersonasAdd(props) {
           value={form.apellido}
           placeholder="Apellido"
           onChange={handleSurname}
-          required
         />
       </div>
       <div>
@@ -84,7 +83,6 @@ export default function PersonasAdd(props) {
           value={form.alias}
           placeholder="Alias"
           onChange={handleAlias}
-          required
         />
       </div>
       <div>
@@ -94,7 +92,6 @@ export default function PersonasAdd(props) {
           value={form.email}
           placeholder="Email"
           onChange={handleEmail}
-          required
         />
       </div>
 

@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 export default function LibrosAdd(props) {
   const history = useHistory();
@@ -44,7 +45,7 @@ export default function LibrosAdd(props) {
       setError("");
       history.push("/libros");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
 
@@ -54,7 +55,7 @@ export default function LibrosAdd(props) {
       setCategorias(respuesta.data);
       setError("");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
   React.useEffect(() => {

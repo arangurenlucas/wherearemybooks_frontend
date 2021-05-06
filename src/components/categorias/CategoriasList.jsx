@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 export default function CategoriasList() {
   const list = useSelector((state) => state.categorias);
@@ -21,7 +22,7 @@ export default function CategoriasList() {
       setError("");
       history.push("/categorias");
     } catch (e) {
-      setError(e.message);
+      swal("Error", e.response.data, "error");
     }
   };
   return (
