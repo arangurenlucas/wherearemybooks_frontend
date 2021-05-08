@@ -32,6 +32,10 @@ function reducer(state = initialState, action) {
     case "LIBROS_LIST":
       newState.libros = action.list;
       return newState;
+    case "BORRAR_LIBROS":
+      newState.libros = newState.libros.filter(
+        (unElemento) => unElemento.id != action.idElementoARemover
+      );
     case "AGREGAR_LIBROS":
       newState.libros.push(action.libro);
       return newState;

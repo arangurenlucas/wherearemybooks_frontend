@@ -9,7 +9,7 @@ export default function LibrosList() {
   const dispatch = useDispatch();
   const [error, setError] = React.useState("");
 
-  React.useEffect(async () => {
+  const traerLibros = async () => {
     try {
       const respuesta = await axios.get("http://localhost:3001/api/libros");
       dispatch({ type: "LIBROS_LIST", list: respuesta.data });
@@ -17,7 +17,20 @@ export default function LibrosList() {
     } catch (e) {
       swal("Error", e.response.data, "error");
     }
+  };
+  React.useEffect(async () => {
+    traerLibros();
   }, []);
+
+  const borrarLibro = async (idLibroABorrar) => {
+    try {
+      await axios.delete("http://localhost:3001/api/libros/" + idLibroABorrar);
+      dispatch({ type: "BORRAR_LIBROS", idElementoARemover: idLibroABorrar });
+      traerLibros();
+    } catch (e) {
+      swal("Error", e.response.data, "error");
+    }
+  };
 
   return (
     <>
@@ -28,7 +41,8 @@ export default function LibrosList() {
         {list.map((unLibro) =>
           unLibro ? (
             <li key={unLibro.id}>
-              <Link to={"/libros/view/" + unLibro.id}>{unLibro.nombre}</Link>
+              <Link to={"/libros/view/" + unLibro.id}>{unLibro.nombre}</Link>{" "}
+              <button onClick={() => borrarLibro(unLibro.id)}>Borrar</button>
             </li>
           ) : null
         )}
