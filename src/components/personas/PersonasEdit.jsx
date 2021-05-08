@@ -18,7 +18,7 @@ export default function PersonasEdit(props) {
   const buscarPorId = async (idPersona) => {
     try {
       const respuesta = await axios.get(
-        "http://localhost:3001/api/personas" + idPersona
+        "http://localhost:3001/api/personas/" + idPersona
       );
       setForm(respuesta.data);
     } catch (e) {

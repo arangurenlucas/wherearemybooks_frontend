@@ -42,7 +42,9 @@ export default function LibrosList() {
           unLibro ? (
             <li key={unLibro.id}>
               <Link to={"/libros/view/" + unLibro.id}>{unLibro.nombre}</Link>{" "}
-              <button onClick={() => borrarLibro(unLibro.id)}>Borrar</button>
+              <button onClick={() => borrarLibro(unLibro.id)}>Borrar</button> {" "}
+              <button>Prestar</button> {" "}
+              <button>Devolver</button>
             </li>
           ) : null
         )}

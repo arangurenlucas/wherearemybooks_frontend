@@ -1,7 +1,7 @@
 import React from "react";
 import "./app.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./components/Home";
+import About from "./components/About";
 import PersonasList from "./components/personas/PersonasList";
 import PersonasAdd from "./components/personas/PersonasAdd";
 import PersonasView from "./components/personas/PersonasView";
@@ -11,6 +11,8 @@ import CategoriasView from "./components/categorias/CategoriasView";
 import CategoriasAdd from "./components/categorias/CategoriasAdd";
 import LibrosList from "./components/libros/LibrosList";
 import LibrosAdd from "./components/libros/LibrosAdd";
+import LibrosView from "./components/libros/LibrosView";
+
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
       </div>
       <div className="rutas">
         <Router>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={About} />
           <Route exact path="/personas" component={PersonasList} />
           <Route exact path="/personas/new" component={PersonasAdd} />
           <Route exact path="/personas/view/:id" component={PersonasView} />
@@ -35,6 +37,7 @@ function App() {
           <Route exact path="/categorias/view/:id" component={CategoriasView} />
           <Route exact path="/categorias/new" component={CategoriasAdd} />
           <Route exact path="/libros" component={LibrosList} />
+          <Route exact path="/libros/view/:id" component={LibrosView} />
           <Route exact path="/libros/new" component={LibrosAdd} />
         </Router>
       </div>
