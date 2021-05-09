@@ -13,7 +13,6 @@ export default function LibrosAdd(props) {
     descripcion: "",
     categoria_id: "",
   });
-  const [error, setError] = React.useState("");
 
   const handleName = (e) => {
     const newForm = JSON.parse(JSON.stringify(form));
@@ -36,13 +35,11 @@ export default function LibrosAdd(props) {
 
   const handleSave = async () => {
     try {
-      console.log(form);
       const serverResponse = await axios.post(
         "http://localhost:3001/api/libros",
         form
       );
       dispatch({ type: "AGREGAR_LIBROS", libro: serverResponse.data });
-      setError("");
       history.push("/libros");
     } catch (e) {
       swal("Error", e.response.data, "error");
@@ -53,7 +50,6 @@ export default function LibrosAdd(props) {
     try {
       const respuesta = await axios.get("http://localhost:3001/api/categorias");
       setCategorias(respuesta.data);
-      setError("");
     } catch (e) {
       swal("Error", e.response.data, "error");
     }

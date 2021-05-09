@@ -7,6 +7,7 @@ import swal from "sweetalert";
 export default function PersonasEdit(props) {
   const params = useParams();
   const history = useHistory();
+
   const list = useSelector((state) => state.personas);
   const [form, setForm] = React.useState({
     nombre: "",
@@ -15,24 +16,7 @@ export default function PersonasEdit(props) {
     email: "",
   });
 
-  const buscarPorId = async (idPersona) => {
-    try {
-      const respuesta = await axios.get(
-        "http://localhost:3001/api/personas/" + idPersona
-      );
-      setForm(respuesta.data);
-    } catch (e) {
-      swal("Error", e.response.data, "error");
-    }
-  };
-  React.useEffect(() => {
-    if (!params.id) return;
-    buscarPorId(params.id);
-  }, [params]);
-
-  const placeHolderData = list.find((unElemento) => unElemento.id == params.id);
-
-  console.log(placeHolderData.nombre);
+  const listadoPersonas = list.find((unaPersona) => unaPersona.id == params.id);
 
   const handleChangeName = (e) => {
     const newForm = JSON.parse(JSON.stringify(form));
@@ -52,7 +36,7 @@ export default function PersonasEdit(props) {
   };
   const handleChangeEmail = (e) => {
     const newForm = JSON.parse(JSON.stringify(form));
-    newForm.email = placeHolderData.email;
+    newForm.email = listadoPersonas.email;
     setForm(newForm);
   };
 
@@ -75,9 +59,8 @@ export default function PersonasEdit(props) {
       <input
         type="text"
         value={form.nombre}
-        placeholder={placeHolderData.nombre}
+        placeholder={listadoPersonas.nombre}
         onChange={handleChangeName}
-        required
       />
 
       <br />
@@ -85,9 +68,8 @@ export default function PersonasEdit(props) {
       <input
         type="text"
         value={form.apellido}
-        placeholder={placeHolderData.apellido}
+        placeholder={listadoPersonas.apellido}
         onChange={handleChangeSurname}
-        required
       />
 
       <br />
@@ -95,19 +77,17 @@ export default function PersonasEdit(props) {
       <input
         type="text"
         value={form.alias}
-        placeholder={placeHolderData.alias}
+        placeholder={listadoPersonas.alias}
         onChange={handleChangeAlias}
-        required
       />
       <br />
 
       <label>Email: </label>
       <input
-        type="text"
-        placeholder={placeHolderData.email}
+        type="email"
+        placeholder={listadoPersonas.email}
         value={form.email}
         onChange={handleChangeEmail}
-        required
       />
       <div className="botonesEdit">
         <button onClick={saveEdit}>Guardar</button>
@@ -116,5 +96,3 @@ export default function PersonasEdit(props) {
     </div>
   );
 }
-
-//

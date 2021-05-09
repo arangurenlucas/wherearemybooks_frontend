@@ -7,7 +7,6 @@ import swal from "sweetalert";
 export default function CategoriasAdd() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [error, setError] = React.useState("");
   const [form, setForm] = React.useState({
     nombre: "",
   });
@@ -25,7 +24,6 @@ export default function CategoriasAdd() {
         form
       );
       dispatch({ type: "AGREGAR_CATEGORIA", categoria: serverResponse.data });
-      setError("");
       history.push("/categorias");
     } catch (e) {
       swal("Error", e.response.data, "error");

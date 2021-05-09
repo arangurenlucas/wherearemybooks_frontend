@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 
 export default function LibrosView(props) {
@@ -10,7 +10,6 @@ export default function LibrosView(props) {
   React.useEffect(() => {
     setLibro(list.find((unLibro) => unLibro.id == params.id));
   }, []);
-  console.log(libro);
   return (
     <>
       <div>

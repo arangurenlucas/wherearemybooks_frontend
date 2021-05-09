@@ -8,7 +8,6 @@ export default function CategoriasList() {
   const list = useSelector((state) => state.categorias);
   const history = useHistory();
   const dispatch = useDispatch();
-  const [error, setError] = React.useState("");
 
   React.useEffect(async () => {
     const respuesta = await axios.get("http://localhost:3001/api/categorias");
@@ -19,7 +18,6 @@ export default function CategoriasList() {
     try {
       await axios.delete("http://localhost:3001/api/categorias/" + idABorrar);
       dispatch({ type: "REMOVER_CATEGORIA", idElementoARemover: idABorrar });
-      setError("");
       history.push("/categorias");
     } catch (e) {
       swal("Error", e.response.data, "error");

@@ -7,7 +7,6 @@ export default function CategoriasView(props) {
   const params = useParams();
   const [categorias, setCategorias] = React.useState("");
   const [libros, setLibros] = React.useState("");
-  const [error, setError] = React.useState("");
 
   const getOverHere = async () => {
     try {
